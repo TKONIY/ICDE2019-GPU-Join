@@ -1562,16 +1562,16 @@ __global__ void probe_perfect_array_varpay (int32_t* data, int32_t* Dr, int n, i
 
     for (size_t i = threadIdx.x + blockIdx.x * blockDim.x; i < n ; i += blockDim.x * gridDim.x) {
         int val = data[i];
-        int payload = i;
+        int payload = i; // table 1 is probe table
         int res = lookup[val];
 
         if (res > 0) {
             res--;
 
             for (int z = 0; z < col_num1; z++)
-                count += Dr[payload + z*rel_size];
+                count += Dr[payload + z*rel_size];  // 
             for (int z = 0; z < col_num2; z++)
-                count += Ds[res + z*rel_size];
+                count += Ds[res + z*rel_size];      
         }
     }
 
